@@ -1,4 +1,4 @@
-﻿namespace Shared.Core;
+﻿namespace Shared.Domain;
 
 public class BaseEntity
 {

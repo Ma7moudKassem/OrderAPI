@@ -9,12 +9,15 @@ public static class ServiceCollectionExtensions
             manager.FeatureProviders.Add(new InternalControllerFeatureProvider());
         });
 
+        services.AddTransient(typeof(IBaseGetRepository<>), typeof(BaseGetRepository<,>))
+                .AddTransient(typeof(IBaseRepository<>), typeof(BaseRepository<,>));
+        
         services.AddSwaggerService();
 
         return services;
     }
 
-    public static IServiceCollection AddDatabaseContexts<T>(this IServiceCollection services, IConfiguration configuration) where T : IdentityDbContext
+    public static IServiceCollection AddDatabaseContexts<T>(this IServiceCollection services, IConfiguration configuration) where T : IdentityDbContext<ApplicationUser>
     {
         string? connectionString = configuration.GetConnectionString("AppConnectionString");
 
@@ -32,31 +35,50 @@ public static class ServiceCollectionExtensions
 
     public static IServiceCollection AddSwaggerService(this IServiceCollection services)
     {
-        services.AddSwaggerGen(c =>
+        services.AddSwaggerGen(options =>
         {
-            c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme()
+            options.SwaggerDoc("v1", new OpenApiInfo
             {
-                Name = "Bearer",
-                BearerFormat = "JWT",
-                Scheme = "bearer",
-                Description = "Specify the authorization token.",
-                In = ParameterLocation.Header,
-                Type = SecuritySchemeType.Http,
-            });
-
-            c.AddSecurityRequirement(new OpenApiSecurityRequirement {
+                Version = "v1",
+                Title = "OrderAPI",
+                Contact = new OpenApiContact
                 {
-                    new OpenApiSecurityScheme {
-                        Reference = new OpenApiReference {
+                    Name = "Mahmoud Kassem",
+                    Email = "www.modykassem123@gmail.com",
+                    Url = new Uri("https://www.googlle.com"),
+                },
+                License = new OpenApiLicense
+                {
+                    Name = "OpenGl",
+                    Url = new Uri("https://www.googlle.com"),
+                }
+            });
+            options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+            {
+                Name = "Authorization",
+                Type = SecuritySchemeType.ApiKey,
+                Scheme = "Bearer",
+                BearerFormat = "JWT",
+                In = ParameterLocation.Header,
+                Description = "Enter you JWT key",
+            });
+            options.AddSecurityRequirement(new OpenApiSecurityRequirement
+            {
+                {
+                    new OpenApiSecurityScheme
+                    {
+                        Reference = new OpenApiReference
+                        {
                             Type = ReferenceType.SecurityScheme,
-                            Id = "Bearer"
-                        }
+                            Id = "Bearer",
+                        },
+                        Name = "Bearer",
+                        In = ParameterLocation.Header,
                     },
-                    new string[] { }
+                    new string[]{ }
                 }
             });
         });
-
         return services;
     }
 }

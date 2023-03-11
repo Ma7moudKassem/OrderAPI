@@ -1,3 +1,2 @@
-﻿global using Shared.Core;
-
-global using MediatR;
+﻿global using Shared.Domain;
+global using System.Linq.Expressions;
