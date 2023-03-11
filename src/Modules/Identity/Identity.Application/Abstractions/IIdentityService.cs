@@ -1,6 +1,6 @@
-﻿namespace Identity.Core;
+﻿namespace Identity.Application;
 
-public interface IUserServices
+public interface IIdentityService
 {
     Task<AuthenticationModel> LogInAsync(LogInModel logInModel);
     Task<AuthenticationModel> RegisterAsync(RegisterModel registerModel);

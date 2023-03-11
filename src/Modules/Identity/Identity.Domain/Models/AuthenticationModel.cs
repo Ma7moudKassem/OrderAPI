@@ -1,4 +1,4 @@
-﻿namespace Identity.Core;
+﻿namespace Identity.Domain;
 
 public class AuthenticationModel
 {
