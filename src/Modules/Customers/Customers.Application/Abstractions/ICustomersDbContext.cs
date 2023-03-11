@@ -1,5 +1,5 @@
-namespace Customers.Application;
+﻿namespace Customers.Application;
 
-public interface ICustomersDbContext
+public interface ICustomersDbContext : IModuleDbContext<Customer>
 {
 }

@@ -1,6 +1,6 @@
 namespace Customers.Infrastructure;
 
-public class CustomersDbContext : ModuleDbContext
+public class CustomersDbContext : ModuleDbContext<Customer> , ICustomersDbContext
 {
     public CustomersDbContext(DbContextOptions<CustomersDbContext> options) : base(options) { }
 

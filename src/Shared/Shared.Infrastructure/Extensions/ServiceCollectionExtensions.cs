@@ -9,9 +9,13 @@ public static class ServiceCollectionExtensions
             manager.FeatureProviders.Add(new InternalControllerFeatureProvider());
         });
 
-        services.AddTransient(typeof(IBaseGetRepository<>), typeof(BaseGetRepository<,>))
-                .AddTransient(typeof(IBaseRepository<>), typeof(BaseRepository<,>));
-        
+        services.AddTransient(typeof(IModuleDbContext<>), typeof(ModuleDbContext<>));
+
+        services.AddTransient(typeof(IBaseGetRepository<,>), typeof(BaseGetRepository<,>))
+                .AddTransient(typeof(IBaseGetUnitOfWork<,>), typeof(BaseGetUnitOfWork<,>))
+                .AddTransient(typeof(IBaseRepository<,>), typeof(BaseRepository<,>))
+                .AddTransient(typeof(IBaseUnitOfWork<,>), typeof(BaseUnitOfWork<,>));
+
         services.AddSwaggerService();
 
         return services;

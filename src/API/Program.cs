@@ -3,7 +3,9 @@ WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 
 builder.Services.AddSharedInfrastructure();
-builder.Services.AddIdentityModule(builder.Configuration);
+
+builder.Services.AddIdentityModule(builder.Configuration)
+                .AddCustomersModule(builder.Configuration);
 
 Log.Logger = new LoggerConfiguration().WriteTo
     .File(string.Concat(Directory

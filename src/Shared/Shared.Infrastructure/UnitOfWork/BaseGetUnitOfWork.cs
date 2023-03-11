@@ -1,7 +1,7 @@
 ﻿namespace Shared.Infrastructure;
 
-public class BaseGetUnitOfWork<TContext, TEntity> : IBaseGetUnitOfWork<TEntity>
-    where TContext : ModuleDbContext where TEntity : BaseEntity
+public class BaseGetUnitOfWork<TContext, TEntity> : IBaseGetUnitOfWork<TContext,TEntity>
+    where TContext : IModuleDbContext<TEntity> where TEntity : BaseEntity
 {
     BaseGetRepository<TContext, TEntity> _repository;
     public BaseGetUnitOfWork(BaseGetRepository<TContext, TEntity> repository) =>

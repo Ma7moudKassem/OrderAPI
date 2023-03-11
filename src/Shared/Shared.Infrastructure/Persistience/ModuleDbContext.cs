@@ -1,13 +1,21 @@
-﻿namespace Shared.Infrastructure;
+﻿using Shared.Abstractions;
 
-public abstract class ModuleDbContext : IdentityDbContext<ApplicationUser>
+namespace Shared.Infrastructure;
+
+public class ModuleDbContext<TEntity> : IdentityDbContext<ApplicationUser>, 
+    IModuleDbContext<TEntity> where TEntity : BaseEntity
 {
-    protected abstract string Schema { get; }
+    DbSet<TEntity> IModuleDbContext<TEntity>.dbSet { get; set; }
+
+    string Schema => throw new NotImplementedException();
+
+    string IModuleDbContext<TEntity>.Schema => throw new NotImplementedException();
+
     public ModuleDbContext(DbContextOptions options) : base(options) { }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        if (string.IsNullOrWhiteSpace(Schema)) modelBuilder.HasDefaultSchema(Schema);
+        if (string.IsNullOrWhiteSpace(IModuleDbContext<TEntity>.Schema)) modelBuilder.HasDefaultSchema(IModuleDbContext<TEntity>.Schema);
 
         modelBuilder.ApplyConfigurationsFromAssembly(GetType().Assembly);
 

@@ -1,6 +1,9 @@
-﻿namespace Shared.Abstractions;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
-public interface IBaseGetUnitOfWork<TEntity> where TEntity : BaseEntity
+namespace Shared.Abstractions;
+
+public interface IBaseGetUnitOfWork<TContext, TEntity>
+    where TContext : IModuleDbContext<TEntity> where TEntity : BaseEntity
 {
     Task<TEntity> ReadAsync(Guid id);
 

@@ -1,7 +1,7 @@
 ﻿namespace Shared.Infrastructure;
 
-public class BaseGetRepository<TContext, TEntity> : IBaseGetRepository<TEntity>
-    where TContext : ModuleDbContext where TEntity : BaseEntity
+public class BaseGetRepository<TContext, TEntity> : IBaseGetRepository<TContext, TEntity>
+    where TContext : IModuleDbContext<TEntity> where TEntity : BaseEntity
 {
 
     protected DbSet<TEntity> dbSet;
@@ -9,7 +9,7 @@ public class BaseGetRepository<TContext, TEntity> : IBaseGetRepository<TEntity>
     public BaseGetRepository(TContext context)
     {
         _context = context;
-        dbSet = _context.Set<TEntity>();
+        dbSet = _context.dbSet;
     }
 
     public virtual async Task<TEntity> GetAsync(Guid id)

@@ -1,5 +1,9 @@
-﻿namespace Shared.Abstractions;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
-public class IBaseUnitOfWork
+namespace Shared.Abstractions;
+
+public interface IBaseUnitOfWork<TContext, TEntity> : IBaseGetUnitOfWork<TContext, TEntity>
+    where TContext : IModuleDbContext<TEntity> where TEntity : BaseEntity
 {
+
 }

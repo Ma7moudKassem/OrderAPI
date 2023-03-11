@@ -1,6 +1,8 @@
 ﻿namespace Customers.Infrastructure;
 
-public class CustomerRepository : BaseRepository<CustomersDbContext, Customer>, ICustomerRepository
+public class CustomerRepository : BaseRepository<ICustomersDbContext, Customer>, ICustomerRepository
 {
-    public CustomerRepository(CustomersDbContext context) : base(context) { }
+    public CustomerRepository(ICustomersDbContext context) : base(context)
+    {
+    }
 }

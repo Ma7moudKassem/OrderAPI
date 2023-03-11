@@ -1,5 +1,5 @@
 ﻿namespace Customers.Application;
 
-public interface ICustomerRepository : IBaseRepository<Customer>
+public interface ICustomerRepository : IBaseRepository<ICustomersDbContext, Customer>
 {
 }
