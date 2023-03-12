@@ -9,19 +9,12 @@ public static class ServiceCollectionExtensions
             manager.FeatureProviders.Add(new InternalControllerFeatureProvider());
         });
 
-        services.AddTransient(typeof(IModuleDbContext<>), typeof(ModuleDbContext<>));
-
-        services.AddTransient(typeof(IBaseGetRepository<,>), typeof(BaseGetRepository<,>))
-                .AddTransient(typeof(IBaseGetUnitOfWork<,>), typeof(BaseGetUnitOfWork<,>))
-                .AddTransient(typeof(IBaseRepository<,>), typeof(BaseRepository<,>))
-                .AddTransient(typeof(IBaseUnitOfWork<,>), typeof(BaseUnitOfWork<,>));
-
         services.AddSwaggerService();
 
         return services;
     }
 
-    public static IServiceCollection AddDatabaseContexts<T>(this IServiceCollection services, IConfiguration configuration) where T : IdentityDbContext<ApplicationUser>
+    public static IServiceCollection AddDatabaseContexts<T>(this IServiceCollection services, IConfiguration configuration) where T : DbContext
     {
         string? connectionString = configuration.GetConnectionString("AppConnectionString");
 

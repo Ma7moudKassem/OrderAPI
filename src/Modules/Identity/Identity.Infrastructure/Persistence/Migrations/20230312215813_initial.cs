@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Identity.Infrastructure.Persistence.Migrations
 {
     /// <inheritdoc />
-    public partial class AddIdentity : Migration
+    public partial class initial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -165,9 +165,9 @@ namespace Identity.Infrastructure.Persistence.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "0012f500-06a4-4466-9cce-4071b711a086", "094b6515-6dc6-4965-b535-ef2d2cd0b1e4", "SuperAdmin", "SUPERADMIN" },
-                    { "55405c35-019a-483d-9bf5-05d43d3fdd4b", "836fc44c-d02a-4d7e-9d80-0771d503f0ab", "Admin", "ADMIN" },
-                    { "c5cc5714-8021-4519-8937-55cdd8411ae8", "d8dfb697-703e-4f49-b8d9-a8e4ad041809", "User", "USER" }
+                    { "75597079-6917-45c7-a4bf-e1ca99df0ace", "2a7491a0-dade-4a33-8850-572993439038", "SuperAdmin", "SUPERADMIN" },
+                    { "7bf88c19-bde1-4e9b-8855-f94a4043a062", "aa3b5526-d37f-480f-b6d4-fb865e375f79", "User", "USER" },
+                    { "dd6d75fc-2470-4959-be74-6d9e1cfee6cd", "ad3072f0-6bb7-4b96-804a-cc500cda7ea3", "Admin", "ADMIN" }
                 });
 
             migrationBuilder.CreateIndex(

@@ -1,8 +1,6 @@
 ﻿global using Shared.Domain;
-global using Shared.Abstractions;
 
 global using System.Reflection;
-global using System.Linq.Expressions;
 
 global using Microsoft.AspNetCore.Mvc;
 global using Microsoft.OpenApi.Models;

@@ -4,10 +4,11 @@ public static class ServiceCollectionExtensions
 {
     public static IServiceCollection AddCustomersInfrastructure(this IServiceCollection services, IConfiguration configuration)
     {
-        services.AddTransient<ICustomersDbContext, CustomersDbContext>();
         services.AddDatabaseContexts<CustomersDbContext>(configuration);
+        services.AddTransient<ICustomersDbContext, CustomersDbContext>();
 
-        services.AddTransient<ICustomerRepository, CustomerRepository>();
+        services.AddTransient<ICustomerRepository, CustomerRepository>()
+                .AddTransient<ICustomerUnitOfWork, CustomerUnitOfWork>();
 
         return services;
     }
