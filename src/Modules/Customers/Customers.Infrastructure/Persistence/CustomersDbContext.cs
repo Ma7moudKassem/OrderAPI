@@ -3,6 +3,7 @@ namespace Customers.Infrastructure;
 public class CustomersDbContext : ModuleDbContext, ICustomersDbContext
 {
     public CustomersDbContext(DbContextOptions<CustomersDbContext> options) : base(options) { }
+
     public DbSet<Customer> Customers { get; set; }
     protected override string Schema => "Customer";
 
@@ -15,9 +16,9 @@ public class CustomersDbContext : ModuleDbContext, ICustomersDbContext
 
     public async Task<IDbContextTransaction> BeginTransaction()
     {
-        if (Database.CurrentTransaction is not null)
-            return Database.CurrentTransaction;
+        if (Database.CurrentTransaction is null)
+            return await Database.BeginTransactionAsync();
 
-        return await Database.BeginTransactionAsync();
+        return null;
     }
 }
