@@ -1,4 +1,4 @@
-﻿namespace Identity.Application.Handlers;
+﻿namespace Identity.Application;
 
 public class ReqisterCommandHandler : IRequestHandler<ReqisterCommand, AuthenticationModel>
 {
