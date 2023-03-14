@@ -2,12 +2,14 @@
 
 public class AddCustomerCommandHandler : IRequestHandler<AddCustomerCommand, Customer>
 {
-    ICustomerUnitOfWork _unitOfWork;
+    readonly ICustomerUnitOfWork _unitOfWork;
     public AddCustomerCommandHandler(ICustomerUnitOfWork unitOfWork) =>
         _unitOfWork = unitOfWork;
 
-    public Task<Customer> Handle(AddCustomerCommand request, CancellationToken cancellationToken)
+    public async Task<Customer> Handle(AddCustomerCommand request, CancellationToken cancellationToken)
     {
-        _unitOfWork.
+        await _unitOfWork.CreateAsync(request.Customer);
+
+        return request.Customer;
     }
 }
