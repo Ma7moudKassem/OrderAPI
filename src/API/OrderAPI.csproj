@@ -16,6 +16,7 @@
   
   <ItemGroup>
     <ProjectReference Include="..\Modules\Customers\Customers.API\Customers.API.csproj" />
+    <ProjectReference Include="..\Modules\Employees\Employees.API\Employees.API.csproj" />
     <ProjectReference Include="..\Modules\Identity\Identity.API\Identity.API.csproj" />
     <ProjectReference Include="..\Shared\Shared.Infrastructure\Shared.Infrastructure.csproj" />
   </ItemGroup>

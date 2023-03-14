@@ -1,6 +1,6 @@
 namespace Customers.Infrastructure;
 
-public class CustomerConfiguration : BaseEntityConfiguration<Customer>
+public class CustomerConfiguration : BaseSettingsEntityConfiguration<Customer>
 {
     public override void Configure(EntityTypeBuilder<Customer> builder)
     {

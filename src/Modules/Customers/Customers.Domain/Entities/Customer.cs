@@ -1,6 +1,6 @@
 ﻿namespace Customers.Domain;
 
-public class Customer : BaseEntity
+public class Customer : BaseSettingsEntity
 {
     public string CompanyName { get; set; }
     public string ContactName { get; set; }

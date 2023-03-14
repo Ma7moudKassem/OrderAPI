@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Customers.Infrastructure.Persistence.Migrations
 {
     /// <inheritdoc />
-    public partial class initial : Migration
+    public partial class InitiateDatabase : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -26,12 +26,19 @@ namespace Customers.Infrastructure.Persistence.Migrations
                     Country = table.Column<string>(type: "nvarchar(15)", maxLength: 15, nullable: false),
                     Phone = table.Column<string>(type: "nvarchar(24)", maxLength: 24, nullable: false),
                     Fax = table.Column<string>(type: "nvarchar(24)", maxLength: 24, nullable: false),
-                    SystemCreationTime = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    SystemCreationTime = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Customers", x => x.Id);
                 });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Customers_Name",
+                table: "Customers",
+                column: "Name",
+                unique: true);
         }
 
         /// <inheritdoc />

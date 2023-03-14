@@ -5,6 +5,7 @@ builder.Services.AddControllers();
 builder.Services.AddSharedInfrastructure();
 
 builder.Services.AddIdentityModule(builder.Configuration)
+                .AddEmployeesModule(builder.Configuration)
                 .AddCustomersModule(builder.Configuration);
 
 Log.Logger = new LoggerConfiguration().WriteTo
