@@ -11,14 +11,17 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Serilog.Sinks.File" Version="5.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Shared\Shared.Infrastructure\Shared.Infrastructure.csproj" />
   </ItemGroup>
   
   <ItemGroup>
     <ProjectReference Include="..\Modules\Customers\Customers.API\Customers.API.csproj" />
     <ProjectReference Include="..\Modules\Employees\Employees.API\Employees.API.csproj" />
     <ProjectReference Include="..\Modules\Identity\Identity.API\Identity.API.csproj" />
-    <ProjectReference Include="..\Shared\Shared.Infrastructure\Shared.Infrastructure.csproj" />
+    <ProjectReference Include="..\Modules\Orders\Orders.API\Orders.API.csproj" />
   </ItemGroup>
 
 </Project>

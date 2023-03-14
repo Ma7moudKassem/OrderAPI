@@ -7,16 +7,8 @@ public class AddRoleCommandHandler : IRequestHandler<AddRoleCommand, string>
 
     public async Task<string> Handle(AddRoleCommand request, CancellationToken cancellationToken)
     {
-        try
-        {
-            var result = await _userService.AddRoleAsync(request.RoleModel);
+        var result = await _userService.AddRoleAsync(request.RoleModel);
 
-            return result;
-        }
-        catch (Exception exception)
-        {
-            await Console.Out.WriteLineAsync(exception.GetExceptionErrorSimplified());
-            throw;
-        }
+        return result;
     }
 }
