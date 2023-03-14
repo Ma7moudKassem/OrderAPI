@@ -15,7 +15,7 @@ public class LogInCommandHandler : IRequestHandler<LogInCommand, AuthenticationM
         }
         catch (Exception exception)
         {
-            await Console.Out.WriteLineAsync(exception.Message);
+            await Console.Out.WriteLineAsync(exception.GetExceptionErrorSimplified());
             throw;
         }
     }

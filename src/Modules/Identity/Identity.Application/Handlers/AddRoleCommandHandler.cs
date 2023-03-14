@@ -15,7 +15,7 @@ public class AddRoleCommandHandler : IRequestHandler<AddRoleCommand, string>
         }
         catch (Exception exception)
         {
-            await Console.Out.WriteLineAsync(exception.Message);
+            await Console.Out.WriteLineAsync(exception.GetExceptionErrorSimplified());
             throw;
         }
     }

@@ -58,7 +58,7 @@ public class IdentityService : IIdentityService
         }
         catch (Exception exception)
         {
-            Log.Error(exception.Message);
+            Log.Error(exception.GetExceptionErrorSimplified());
             throw;
         };
     }
@@ -92,7 +92,7 @@ public class IdentityService : IIdentityService
         }
         catch (Exception exception)
         {
-            Log.Error(exception.Message);
+            Log.Error(exception.GetExceptionErrorSimplified());
             throw;
         }
     }
@@ -115,7 +115,7 @@ public class IdentityService : IIdentityService
         }
         catch (Exception exception)
         {
-            Log.Error(exception.Message);
+            Log.Error(exception.GetExceptionErrorSimplified());
             throw;
         }
     }
@@ -156,7 +156,7 @@ public class IdentityService : IIdentityService
         }
         catch (Exception exception)
         {
-            Log.Error(exception.Message);
+            Log.Error(exception.GetExceptionErrorSimplified());
             throw;
         }
     }

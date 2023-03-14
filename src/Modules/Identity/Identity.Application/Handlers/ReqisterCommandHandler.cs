@@ -15,7 +15,7 @@ public class ReqisterCommandHandler : IRequestHandler<ReqisterCommand, Authentic
         }
         catch (Exception exception)
         {
-            await Console.Out.WriteLineAsync(exception.Message);
+            await Console.Out.WriteLineAsync(exception.GetExceptionErrorSimplified());
             throw;
         }
     }

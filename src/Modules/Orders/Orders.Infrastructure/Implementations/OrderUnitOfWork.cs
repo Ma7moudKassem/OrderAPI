@@ -1,28 +1,27 @@
-namespace Employees.Infrastructure;
+namespace Orders.Infrastructure;
 
-public class EmployeeUnitOfWork : IEmployeeUnitOfWork
+public class OrderUnitOfWork : IOrderUnitOfWork
 {
-    readonly IEmployeeRepository _repository;
-    public EmployeeUnitOfWork(IEmployeeRepository repository) => 
-        _repository = repository;
+    IOrderRepository _repository;
+    public OrderUnitOfWork(IOrderRepository repository) => _repository = repository;
 
-    public async Task<Employee> ReadAsync(Guid id) =>
+    public async Task<Order> ReadAsync(Guid id) =>
         await _repository.GetAsync(id);
-    public async Task<IEnumerable<Employee>> ReadAsync() =>
+    public async Task<IEnumerable<Order>> ReadAsync() =>
         await _repository.GetAsync();
-    public async Task<IEnumerable<Employee>> ReadAsync(Expression<Func<Employee, bool>> predicate) =>
+    public async Task<IEnumerable<Order>> ReadAsync(Expression<Func<Order, bool>> predicate) =>
         await _repository.GetAsync(predicate);
 
-    public async Task<Employee> CreateAsync(Employee employee)
+    public async Task<Order> CreateAsync(Order order)
     {
         using IDbContextTransaction transaction = await _repository.BeginTransaction();
         try
         {
-            await _repository.AddAsync(employee);
+            await _repository.AddAsync(order);
 
             if (transaction is not null) await transaction.CommitAsync();
 
-            return employee;
+            return order;
         }
         catch (Exception exception)
         {
@@ -33,16 +32,16 @@ public class EmployeeUnitOfWork : IEmployeeUnitOfWork
 
         }
     }
-    public async Task<IEnumerable<Employee>> CreateAsync(IEnumerable<Employee> employees)
+    public async Task<IEnumerable<Order>> CreateAsync(IEnumerable<Order> orders)
     {
         using IDbContextTransaction transaction = await _repository.BeginTransaction();
         try
         {
-            await _repository.AddAsync(employees);
+            await _repository.AddAsync(orders);
 
             if (transaction is not null) await transaction.CommitAsync();
 
-            return employees;
+            return orders;
         }
         catch (Exception exception)
         {
@@ -54,16 +53,16 @@ public class EmployeeUnitOfWork : IEmployeeUnitOfWork
         }
     }
 
-    public async Task<Employee> UpdateAsync(Employee employee)
+    public async Task<Order> UpdateAsync(Order order)
     {
         using IDbContextTransaction transaction = await _repository.BeginTransaction();
         try
         {
-            await _repository.EditAsync(employee);
+            await _repository.EditAsync(order);
 
             if (transaction is not null) await transaction.CommitAsync();
 
-            return employee;
+            return order;
         }
         catch (Exception exception)
         {
@@ -74,16 +73,16 @@ public class EmployeeUnitOfWork : IEmployeeUnitOfWork
 
         }
     }
-    public async Task<IEnumerable<Employee>> UpdateAsync(IEnumerable<Employee> employees)
+    public async Task<IEnumerable<Order>> UpdateAsync(IEnumerable<Order> orders)
     {
         using IDbContextTransaction transaction = await _repository.BeginTransaction();
         try
         {
-            await _repository.EditAsync(employees);
+            await _repository.EditAsync(orders);
 
             if (transaction is not null) await transaction.CommitAsync();
 
-            return employees;
+            return orders;
         }
         catch (Exception exception)
         {
@@ -113,12 +112,12 @@ public class EmployeeUnitOfWork : IEmployeeUnitOfWork
 
         }
     }
-    public async Task DeleteAsync(Employee employee)
+    public async Task DeleteAsync(Order order)
     {
         using IDbContextTransaction transaction = await _repository.BeginTransaction();
         try
         {
-            await _repository.RemoveAsync(employee);
+            await _repository.RemoveAsync(order);
 
             if (transaction is not null) await transaction.CommitAsync();
         }
@@ -131,12 +130,12 @@ public class EmployeeUnitOfWork : IEmployeeUnitOfWork
 
         }
     }
-    public async Task DeleteAsync(IEnumerable<Employee> employees)
+    public async Task DeleteAsync(IEnumerable<Order> orders)
     {
         using IDbContextTransaction transaction = await _repository.BeginTransaction();
         try
         {
-            await _repository.RemoveAsync(employees);
+            await _repository.RemoveAsync(orders);
 
             if (transaction is not null) await transaction.CommitAsync();
         }

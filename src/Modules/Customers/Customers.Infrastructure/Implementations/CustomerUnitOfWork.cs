@@ -27,7 +27,7 @@ public class CustomerUnitOfWork : ICustomerUnitOfWork
         {
             if (transaction is not null) await transaction.RollbackAsync();
 
-            Log.Error(exception.Message);
+            Log.Error(exception.GetExceptionErrorSimplified());
             throw;
 
         }
@@ -47,7 +47,7 @@ public class CustomerUnitOfWork : ICustomerUnitOfWork
         {
             if (transaction is not null) await transaction.RollbackAsync();
 
-            Log.Error(exception.Message);
+            Log.Error(exception.GetExceptionErrorSimplified());
             throw;
 
         }
@@ -68,7 +68,7 @@ public class CustomerUnitOfWork : ICustomerUnitOfWork
         {
             if (transaction is not null) await transaction.RollbackAsync();
 
-            Log.Error(exception.Message);
+            Log.Error(exception.GetExceptionErrorSimplified());
             throw;
 
         }
@@ -88,7 +88,7 @@ public class CustomerUnitOfWork : ICustomerUnitOfWork
         {
             if (transaction is not null) await transaction.RollbackAsync();
 
-            Log.Error(exception.Message);
+            Log.Error(exception.GetExceptionErrorSimplified());
             throw;
 
         }
@@ -107,7 +107,7 @@ public class CustomerUnitOfWork : ICustomerUnitOfWork
         {
             if (transaction is not null) await transaction.RollbackAsync();
 
-            Log.Error(exception.Message);
+            Log.Error(exception.GetExceptionErrorSimplified());
             throw;
 
         }
@@ -125,7 +125,7 @@ public class CustomerUnitOfWork : ICustomerUnitOfWork
         {
             if (transaction is not null) await transaction.RollbackAsync();
 
-            Log.Error(exception.Message);
+            Log.Error(exception.GetExceptionErrorSimplified());
             throw;
 
         }
@@ -143,7 +143,7 @@ public class CustomerUnitOfWork : ICustomerUnitOfWork
         {
             if (transaction is not null) await transaction.RollbackAsync();
 
-            Log.Error(exception.Message);
+            Log.Error(exception.GetExceptionErrorSimplified());
             throw;
 
         }
