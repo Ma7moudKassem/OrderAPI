@@ -3,7 +3,7 @@
 public class BaseUnitOfWork<TEntity, TContext> where TEntity : BaseEntity
     where TContext : IModuleDbContext<TEntity>
 {
-    IBaseRepository<TEntity, TContext> _repository;
+    readonly IBaseRepository<TEntity, TContext> _repository;
     public BaseUnitOfWork(IBaseRepository<TEntity, TContext> repository) => _repository = repository;
 
     public async Task<TEntity> ReadAsync(Guid id) =>
@@ -95,14 +95,17 @@ public class BaseUnitOfWork<TEntity, TContext> where TEntity : BaseEntity
         }
     }
 
-    public async Task DeleteAsync(Guid id)
+    public async Task<TEntity> DeleteAsync(Guid id)
     {
         using IDbContextTransaction transaction = await _repository.BeginTransaction();
         try
         {
-            await _repository.RemoveAsync(id);
+            TEntity entity = await _repository.RemoveAsync(id);
 
             if (transaction is not null) await transaction.CommitAsync();
+
+            return entity;
+
         }
         catch (Exception exception)
         {
@@ -113,7 +116,7 @@ public class BaseUnitOfWork<TEntity, TContext> where TEntity : BaseEntity
 
         }
     }
-    public async Task DeleteAsync(TEntity entity)
+    public async Task<TEntity> DeleteAsync(TEntity entity)
     {
         using IDbContextTransaction transaction = await _repository.BeginTransaction();
         try
@@ -121,6 +124,8 @@ public class BaseUnitOfWork<TEntity, TContext> where TEntity : BaseEntity
             await _repository.RemoveAsync(entity);
 
             if (transaction is not null) await transaction.CommitAsync();
+
+            return entity;
         }
         catch (Exception exception)
         {
@@ -131,7 +136,7 @@ public class BaseUnitOfWork<TEntity, TContext> where TEntity : BaseEntity
 
         }
     }
-    public async Task DeleteAsync(IEnumerable<TEntity> entities)
+    public async Task<IEnumerable<TEntity>> DeleteAsync(IEnumerable<TEntity> entities)
     {
         using IDbContextTransaction transaction = await _repository.BeginTransaction();
         try
@@ -139,6 +144,8 @@ public class BaseUnitOfWork<TEntity, TContext> where TEntity : BaseEntity
             await _repository.RemoveAsync(entities);
 
             if (transaction is not null) await transaction.CommitAsync();
+
+            return entities;
         }
         catch (Exception exception)
         {

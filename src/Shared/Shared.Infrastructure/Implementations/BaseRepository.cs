@@ -17,85 +17,91 @@ public class BaseRepository<TEntity, TContext> : IBaseRepository<TEntity, TConte
     public async Task<IEnumerable<TEntity>> GetAsync(Expression<Func<TEntity, bool>> predicate) =>
         await dbSet.Where(predicate).ToListAsync();
 
-    public async Task<TEntity> AddAsync(TEntity TEntity)
+    public async Task<TEntity> AddAsync(TEntity entity)
     {
-        if (TEntity is null) throw new ArgumentNullException(nameof(TEntity) + "is null");
+        if (entity is null) throw new ArgumentNullException(typeof(TEntity).Name + "is null");
 
-        await dbSet.AddAsync(TEntity);
+        await dbSet.AddAsync(entity);
         await _context.SaveChangesAsync();
 
-        return TEntity;
+        return entity;
     }
-    public async Task<IEnumerable<TEntity>> AddAsync(IEnumerable<TEntity> TEntitys)
+    public async Task<IEnumerable<TEntity>> AddAsync(IEnumerable<TEntity> entities)
     {
-        if (TEntitys is null || !TEntitys.Any())
+        if (entities is null || !entities.Any())
             throw new ArgumentNullException($"{typeof(TEntity).Name}s are null or empty");
 
-        await dbSet.AddRangeAsync(TEntitys);
+        await dbSet.AddRangeAsync(entities);
         await _context.SaveChangesAsync();
 
-        return TEntitys;
+        return entities;
     }
 
-    public async Task<TEntity> EditAsync(TEntity TEntity)
+    public async Task<TEntity> EditAsync(TEntity entity)
     {
-        await CheckParameterIsExistingInDb(TEntity);
+        await CheckParameterIsExistingInDb(entity);
 
-        await Task.Run(() => dbSet.Update(TEntity));
+        await Task.Run(() => dbSet.Update(entity));
         await _context.SaveChangesAsync();
 
-        return TEntity;
+        return entity;
     }
-    public async Task<IEnumerable<TEntity>> EditAsync(IEnumerable<TEntity> TEntitys)
+    public async Task<IEnumerable<TEntity>> EditAsync(IEnumerable<TEntity> entities)
     {
-        await CheckParameterIsExistingInDb(TEntitys);
+        await CheckParameterIsExistingInDb(entities);
 
-        await Task.Run(() => dbSet.UpdateRange(TEntitys));
+        await Task.Run(() => dbSet.UpdateRange(entities));
         await _context.SaveChangesAsync();
 
-        return TEntitys;
+        return entities;
     }
 
-    public async Task RemoveAsync(Guid id)
+    public async Task<TEntity> RemoveAsync(Guid id)
     {
-        TEntity TEntityFromDb = await GetAsync(id);
+        TEntity entityFromDb = await GetAsync(id);
 
-        await CheckParameterIsExistingInDb(TEntityFromDb);
+        await CheckParameterIsExistingInDb(entityFromDb);
 
-        await Task.Run(() => dbSet.Remove(TEntityFromDb));
+        await Task.Run(() => dbSet.Remove(entityFromDb));
         await _context.SaveChangesAsync();
+
+        return entityFromDb;
     }
-    public async Task RemoveAsync(TEntity TEntity)
+    public async Task<TEntity> RemoveAsync(TEntity entity)
     {
-        await CheckParameterIsExistingInDb(TEntity);
+        await CheckParameterIsExistingInDb(entity);
 
-        await Task.Run(() => dbSet.Remove(TEntity));
+        await Task.Run(() => dbSet.Remove(entity));
         await _context.SaveChangesAsync();
+
+        return entity;
     }
-    public async Task RemoveAsync(IEnumerable<TEntity> TEntitys)
+    public async Task<IEnumerable<TEntity>> RemoveAsync(IEnumerable<TEntity> entities)
     {
-        await CheckParameterIsExistingInDb(TEntitys);
+        await CheckParameterIsExistingInDb(entities);
 
-        await Task.Run(() => dbSet.RemoveRange(TEntitys));
+        await Task.Run(() => dbSet.RemoveRange(entities));
         await _context.SaveChangesAsync();
+
+        return entities;
     }
 
     public async Task<IDbContextTransaction> BeginTransaction() =>
         await _context.BeginTransaction();
 
-    private async Task CheckParameterIsExistingInDb(IEnumerable<TEntity> TEntitys)
+    private async Task CheckParameterIsExistingInDb(IEnumerable<TEntity> entities)
     {
-        IEnumerable<Guid> TEntitysIds = TEntitys.Select(e => e.Id);
-        IEnumerable<TEntity> TEntitysFromDb = await GetAsync(e => TEntitysIds.Contains(e.Id));
+        IEnumerable<Guid> entitiesIds = entities.Select(e => e.Id);
+        IEnumerable<TEntity> entitiesFromDb = await GetAsync(e => entitiesIds.Contains(e.Id));
 
-        if (!TEntitysFromDb.Any() || TEntitysFromDb.Count() != TEntitys.Count())
+        if (!entitiesFromDb.Any() || entitiesFromDb.Count() != entities.Count())
             throw new ArgumentNullException($"{typeof(TEntity).Name}s are not found in database");
     }
-    private async Task CheckParameterIsExistingInDb(TEntity TEntity)
+    private async Task CheckParameterIsExistingInDb(TEntity entity)
     {
-        TEntity TEntityFromDb = await GetAsync(TEntity.Id);
+        TEntity entityFromDb = await GetAsync(entity.Id);
 
-        if (TEntityFromDb is null || TEntityFromDb.Id.Equals(Guid.Empty))
+        if (entityFromDb is null || entityFromDb.Id.Equals(Guid.Empty))
             throw new ArgumentNullException($"{typeof(TEntity).Name} is not found in database");
     }
 }

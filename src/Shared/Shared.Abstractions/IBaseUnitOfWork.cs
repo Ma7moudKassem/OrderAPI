@@ -14,7 +14,7 @@ public interface IBaseUnitOfWork<TEntity, TContext> where TEntity : BaseEntity
     Task<TEntity> UpdateAsync(TEntity entity);
     Task<IEnumerable<TEntity>> UpdateAsync(IEnumerable<TEntity> entities);
 
-    Task DeleteAsync(Guid id);
-    Task DeleteAsync(TEntity entity);
-    Task DeleteAsync(IEnumerable<TEntity> entities);
+    Task<TEntity> DeleteAsync(Guid id);
+    Task<TEntity> DeleteAsync(TEntity entity);
+    Task<IEnumerable<TEntity>> DeleteAsync(IEnumerable<TEntity> entities);
 }

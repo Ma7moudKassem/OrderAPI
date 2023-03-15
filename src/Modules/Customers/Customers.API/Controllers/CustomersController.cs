@@ -22,21 +22,23 @@ public class CustomersController : ControllerBase
     }
 
     [HttpGet("{id}")]
-    public async Task<IActionResult> GetById([FromRoute] Guid id)
+    public async Task<IActionResult> GetById(Guid id)
     {
         Customer customer = await _mediator.Send(new GetCustomerByIdQuery(id));
 
-        if (ModelState.IsValid)
-            return Ok(customer);
+        if (customer is null)
+            return NotFound();
 
-        return BadRequest();
+        if (!ModelState.IsValid)
+            return BadRequest();
+
+        return Ok(customer);
     }
 
     [HttpPost]
     public async Task<IActionResult> Post(Customer customer)
     {
         Customer customerCreated = await _mediator.Send(new AddCustomerCommand(customer));
-
 
         if (ModelState.IsValid)
             return Ok(customerCreated);
@@ -78,9 +80,11 @@ public class CustomersController : ControllerBase
     }
 
     [HttpDelete("{id}")]
-    public async Task<IActionResult> Delete([FromRoute] Guid id)
+    public async Task<IActionResult> Delete(Guid id)
     {
-        await _mediator.Send(new DeleteCustomerByIdCommand(id));
+        Customer coustomer = await _mediator.Send(new DeleteCustomerByIdCommand(id));
+
+        if (coustomer is null) return NotFound();
 
         if (ModelState.IsValid)
             return Ok("Data Deleted Successfully");

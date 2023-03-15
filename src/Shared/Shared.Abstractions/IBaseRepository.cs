@@ -6,15 +6,15 @@ public interface IBaseRepository<TEntity, TContext> where TEntity : BaseEntity w
     Task<IEnumerable<TEntity>> GetAsync();
     Task<IEnumerable<TEntity>> GetAsync(Expression<Func<TEntity, bool>> predicate);
 
-    Task<TEntity> AddAsync(TEntity TEntity);
-    Task<IEnumerable<TEntity>> AddAsync(IEnumerable<TEntity> TEntitys);
+    Task<TEntity> AddAsync(TEntity entity);
+    Task<IEnumerable<TEntity>> AddAsync(IEnumerable<TEntity> entities);
 
-    Task<TEntity> EditAsync(TEntity TEntity);
-    Task<IEnumerable<TEntity>> EditAsync(IEnumerable<TEntity> TEntitys);
+    Task<TEntity> EditAsync(TEntity entity);
+    Task<IEnumerable<TEntity>> EditAsync(IEnumerable<TEntity> entities);
 
-    Task RemoveAsync(Guid id);
-    Task RemoveAsync(TEntity TEntity);
-    Task RemoveAsync(IEnumerable<TEntity> TEntitys);
+    Task<TEntity> RemoveAsync(Guid id);
+    Task<TEntity> RemoveAsync(TEntity entity);
+    Task<IEnumerable<TEntity>> RemoveAsync(IEnumerable<TEntity> entities);
 
     Task<IDbContextTransaction> BeginTransaction();
 }

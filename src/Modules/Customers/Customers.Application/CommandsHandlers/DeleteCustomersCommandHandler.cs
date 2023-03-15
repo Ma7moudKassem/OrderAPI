@@ -1,15 +1,13 @@
 ﻿namespace Customers.Application;
 
-public class DeleteCustomersCommandHandler : IRequestHandler<DeleteCustomersCommand>
+public class DeleteCustomersCommandHandler : IRequestHandler<DeleteCustomersCommand, IEnumerable<Customer>>
 {
     readonly ICustomerUnitOfWork _unitOfWork;
     public DeleteCustomersCommandHandler(ICustomerUnitOfWork unitOfWork) =>
         _unitOfWork = unitOfWork;
 
-    public async Task<Unit> Handle(DeleteCustomersCommand request, CancellationToken cancellationToken)
+    public async Task<IEnumerable<Customer>> Handle(DeleteCustomersCommand request, CancellationToken cancellationToken)
     {
-        await _unitOfWork.DeleteAsync(request.Customers);
-
-        return Unit.Value;
+        return await _unitOfWork.DeleteAsync(request.Customers);
     }
 }

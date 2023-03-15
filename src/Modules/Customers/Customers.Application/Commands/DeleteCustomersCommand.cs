@@ -1,3 +1,3 @@
 ﻿namespace Customers.Application;
 
-public record DeleteCustomersCommand(IEnumerable<Customer> Customers) : IRequest;
+public record DeleteCustomersCommand(IEnumerable<Customer> Customers) : IRequest<IEnumerable<Customer>>;
