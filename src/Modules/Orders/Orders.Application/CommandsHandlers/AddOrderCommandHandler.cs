@@ -1,5 +1,3 @@
-using Shared.Contracts;
-
 namespace Orders.Application;
 
 public class AddOrderCommandHandler : IRequestHandler<AddOrderCommand, Order>
@@ -14,9 +12,9 @@ public class AddOrderCommandHandler : IRequestHandler<AddOrderCommand, Order>
 
     public async Task<Order> Handle(AddOrderCommand request, CancellationToken cancellationToken)
     {
-        request.Order.customer = await _customerAPI.GetCustomer(request.Order.CustomerId);
-
         await _unitOfWork.CreateAsync(request.Order);
+
+        request.Order.Customer = await _customerAPI.GetCustomer(request.Order.CustomerId);
 
         return request.Order;
     }

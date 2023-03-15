@@ -2,15 +2,20 @@
 
 public static class ServiceCollectionExtensions
 {
-    public static IServiceCollection AddSharedInfrastructure(this IServiceCollection services)
+    public static IServiceCollection AddSharedInfrastructure(this IServiceCollection services, IConfiguration configuration)
     {
+        services.AddSharedContracts(configuration);
+
+        services.AddTransient(typeof(IBaseRepository<,>), typeof(BaseRepository<,>))
+                .AddTransient(typeof(IBaseUnitOfWork<,>), typeof(BaseUnitOfWork<,>));
+        
         services.AddControllers().ConfigureApplicationPartManager(manager =>
         {
             manager.FeatureProviders.Add(new InternalControllerFeatureProvider());
         });
 
         services.AddSwaggerService();
-
+        
         return services;
     }
 

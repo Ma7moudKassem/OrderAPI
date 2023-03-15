@@ -4,7 +4,7 @@ public class EmployeesDbContext : ModuleDbContext, IEmployeesDbContext
 {
     public EmployeesDbContext(DbContextOptions<EmployeesDbContext> options) : base(options) { }
 
-    public DbSet<Employee> Employees { get; set; }
+    public DbSet<Employee> entities { get; set; }
     protected override string Schema => "Employee";
 
     protected override void OnModelCreating(ModelBuilder builder)

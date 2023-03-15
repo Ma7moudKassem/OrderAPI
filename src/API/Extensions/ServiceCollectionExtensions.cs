@@ -4,7 +4,7 @@ public static class ServiceCollectionExtensions
 {
     public static IServiceCollection AddModules(this IServiceCollection services, IConfiguration configuration)
     {
-        services.AddSharedInfrastructure();
+        services.AddSharedInfrastructure(configuration);
 
         services.AddCustomersModule(configuration)
                 .AddEmployeesModule(configuration)

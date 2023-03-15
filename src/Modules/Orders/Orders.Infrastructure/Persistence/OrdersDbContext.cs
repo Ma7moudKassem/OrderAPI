@@ -4,7 +4,7 @@ public class OrdersDbContext : ModuleDbContext, IOrdersDbContext
 {
     public OrdersDbContext(DbContextOptions<OrdersDbContext> options) : base(options) { }
 
-    public DbSet<Order> Orders { get; set; }
+    public DbSet<Order> entities { get; set; }
     protected override string Schema => "Order";
 
     protected override void OnModelCreating(ModelBuilder builder)

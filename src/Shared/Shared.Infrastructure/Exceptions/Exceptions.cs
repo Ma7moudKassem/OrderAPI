@@ -1,6 +1,6 @@
 ﻿namespace Shared.Infrastructure;
 
-public static class ExceptionSimplified
+public static class Exceptions
 {
     public static string GetExceptionErrorSimplified(this Exception exception)
     {

@@ -5,14 +5,12 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>
-
+  
   <ItemGroup>
-    <PackageReference Include="Refit" Version="6.3.2" />
-    <PackageReference Include="Refit.HttpClientFactory" Version="6.3.2" />
+    <ProjectReference Include="..\..\..\Shared\Shared.Infrastructure\Shared.Infrastructure.csproj" />
   </ItemGroup>
-
+  
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Shared\Shared.Application\Shared.Application.csproj" />
     <ProjectReference Include="..\Customers.Domain\Customers.Domain.csproj" />
   </ItemGroup>
 

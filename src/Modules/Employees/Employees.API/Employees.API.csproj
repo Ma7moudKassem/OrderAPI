@@ -8,9 +8,12 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\Shared\Shared.Infrastructure\Shared.Infrastructure.csproj" />
+  </ItemGroup>
+  
+  <ItemGroup>
     <ProjectReference Include="..\Employees.Infrastructure\Employees.Infrastructure.csproj" />
   </ItemGroup>
-
+  
   <ItemGroup>
     <Folder Include="Controllers\" />
   </ItemGroup>

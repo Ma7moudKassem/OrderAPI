@@ -1,12 +1,8 @@
-using Shared.Contracts;
-using System.ComponentModel.DataAnnotations.Schema;
-
 namespace Orders.Domain;
 
-public class Order : BaseEntity
+public partial class Order : BaseEntity
 {
     public Guid CustomerId { get; set; }
-    [NotMapped] public CustomerDTO? Customer { get; set; }
     public Guid EmployeeId { get; set; }
 
     public string Freight { get; set; }
@@ -20,6 +16,6 @@ public class Order : BaseEntity
     public int ShipVia { get; set; }
 
     public DateTime OrderDate { get; set; }
-    public DateTime RequiredDate { get; set; }
     public DateTime ShippedDate { get; set; }
+    public DateTime RequiredDate { get; set; }
 }

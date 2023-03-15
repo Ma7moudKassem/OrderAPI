@@ -1,6 +1,3 @@
-using Microsoft.Extensions.Configuration;
-using Refit;
-
 namespace Customers.Application;
 
 public static class ServiceCollectionExtensions
