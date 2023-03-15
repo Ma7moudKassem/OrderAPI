@@ -1,10 +1,14 @@
+using Shared.Contracts;
+using System.ComponentModel.DataAnnotations.Schema;
+
 namespace Orders.Domain;
 
 public class Order : BaseEntity
 {
     public Guid CustomerId { get; set; }
+    [NotMapped] public CustomerDTO? Customer { get; set; }
     public Guid EmployeeId { get; set; }
-    
+
     public string Freight { get; set; }
     public string ShipName { get; set; }
     public string ShipAddress { get; set; }

@@ -1,9 +1,20 @@
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Hosting;
+using Newtonsoft.Json;
+using Refit;
+using Shared.Contracts;
+
 namespace Orders.Infrastructure;
 
 public class OrderUnitOfWork : IOrderUnitOfWork
 {
     IOrderRepository _repository;
-    public OrderUnitOfWork(IOrderRepository repository) => _repository = repository;
+    IConfiguration _configuration;
+    public OrderUnitOfWork(IOrderRepository repository, IConfiguration configuration)
+    {
+        _repository = repository;
+        _configuration = configuration;
+    }
 
     public async Task<Order> ReadAsync(Guid id) =>
         await _repository.GetAsync(id);
@@ -29,7 +40,6 @@ public class OrderUnitOfWork : IOrderUnitOfWork
 
             Log.Error(exception.GetExceptionErrorSimplified());
             throw;
-
         }
     }
     public async Task<IEnumerable<Order>> CreateAsync(IEnumerable<Order> orders)

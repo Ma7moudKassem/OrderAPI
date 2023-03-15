@@ -1,3 +1,5 @@
+using Customers.Application;
+
 namespace Orders.Infrastructure;
 
 public static class ServiceCollectionExtensions
@@ -9,6 +11,8 @@ public static class ServiceCollectionExtensions
 
         services.AddTransient<IOrderRepository, OrderRepository>()
                 .AddTransient<IOrderUnitOfWork, OrderUnitOfWork>();
+
+        services.AddSharedContracts(configuration);
 
         return services;
     }

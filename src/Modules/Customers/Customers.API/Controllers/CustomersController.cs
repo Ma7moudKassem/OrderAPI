@@ -5,7 +5,10 @@
 public class CustomersController : ControllerBase
 {
     readonly IMediator _mediator;
-    public CustomersController(IMediator mediator) => _mediator = mediator;
+    public CustomersController(IMediator mediator)
+    {
+        _mediator = mediator;
+    }
 
     [HttpGet]
     public async Task<IActionResult> Get()
@@ -33,6 +36,7 @@ public class CustomersController : ControllerBase
     public async Task<IActionResult> Post(Customer customer)
     {
         Customer customerCreated = await _mediator.Send(new AddCustomerCommand(customer));
+
 
         if (ModelState.IsValid)
             return Ok(customerCreated);
