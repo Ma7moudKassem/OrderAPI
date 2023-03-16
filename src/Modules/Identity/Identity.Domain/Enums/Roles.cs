@@ -2,7 +2,7 @@
 
 public enum Roles
 {
-    User = 0,
-    Admin = 1,
-    SuperAdmin = 2
+    [Description("User")] User = 0,
+    [Description("Admin")] Admin = 1,
+    [Description("Super Admin")] SuperAdmin = 2
 }

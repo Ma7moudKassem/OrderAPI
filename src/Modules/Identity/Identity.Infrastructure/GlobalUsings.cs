@@ -1,7 +1,6 @@
 ﻿global using Identity.Domain;
 global using Identity.Application;
 
-global using Shared.Domain;
 global using Shared.Infrastructure;
 
 global using System.Text;

@@ -2,7 +2,5 @@
 
 public class CustomerRepository : BaseRepository<Customer, ICustomersDbContext>, ICustomerRepository
 {
-    public CustomerRepository(ICustomersDbContext context) : base(context)
-    {
-    }
+    public CustomerRepository(ICustomersDbContext context) : base(context) { }
 }

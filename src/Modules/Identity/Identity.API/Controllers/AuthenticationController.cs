@@ -4,7 +4,7 @@
 [Route("api/auth")]
 public class AuthenticationController : ControllerBase
 {
-    IMediator _mediator;
+    readonly IMediator _mediator;
     public AuthenticationController(IMediator mediator) =>
         _mediator = mediator;
 

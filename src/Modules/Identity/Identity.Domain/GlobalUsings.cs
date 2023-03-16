@@ -1,1 +1,3 @@
-﻿global using Microsoft.AspNetCore.Identity;
+﻿global using System.ComponentModel;
+
+global using Microsoft.AspNetCore.Identity;

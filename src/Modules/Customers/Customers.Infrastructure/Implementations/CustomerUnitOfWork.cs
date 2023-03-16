@@ -1,10 +1,6 @@
-﻿using Shared.Abstractions;
-
-namespace Customers.Infrastructure;
+﻿namespace Customers.Infrastructure;
 
 public class CustomerUnitOfWork : BaseUnitOfWork<Customer, ICustomersDbContext>, ICustomerUnitOfWork
 {
-    public CustomerUnitOfWork(ICustomerRepository repository) : base(repository)
-    {
-    }
+    public CustomerUnitOfWork(ICustomerRepository repository) : base(repository) { }
 }
