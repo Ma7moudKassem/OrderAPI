@@ -9,7 +9,9 @@ public static class ServiceCollectionExtensions
         services.AddCustomersModule(configuration)
                 .AddEmployeesModule(configuration)
                 .AddIdentityModule(configuration)
-                .AddOrdersModule(configuration);
+                .AddOrdersModule(configuration)
+                .AddOrdersDetailsModule(configuration)
+                ;
 
         return services;
     }

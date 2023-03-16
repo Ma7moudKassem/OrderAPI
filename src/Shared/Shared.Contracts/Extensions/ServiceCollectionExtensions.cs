@@ -1,6 +1,3 @@
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Refit;
 namespace Shared.Contracts;
 
 public static class ServiceCollectionExtensions
@@ -15,6 +12,7 @@ public static class ServiceCollectionExtensions
 
         services.AddRefitClient<ICustomerAPI>().ConfigureHttpClient(action);
         services.AddRefitClient<IEmployeeAPI>().ConfigureHttpClient(action);
+        services.AddRefitClient<IOrdersAPI>().ConfigureHttpClient(action);
 
         return services;
     }
