@@ -11,7 +11,8 @@ public class BaseRepository<TEntity, TContext> : IBaseRepository<TEntity, TConte
     }
 
     public async Task<TEntity> GetAsync(Guid id) =>
-    await dbSet.FirstOrDefaultAsync(e => e.Id == id) ?? Activator.CreateInstance<TEntity>();
+    await dbSet.FirstOrDefaultAsync(e => e.Id == id) ??
+        Activator.CreateInstance<TEntity>();
     public async Task<IEnumerable<TEntity>> GetAsync() =>
         await dbSet.ToListAsync();
     public async Task<IEnumerable<TEntity>> GetAsync(Expression<Func<TEntity, bool>> predicate) =>
@@ -58,9 +59,9 @@ public class BaseRepository<TEntity, TContext> : IBaseRepository<TEntity, TConte
 
     public async Task<TEntity> RemoveAsync(Guid id)
     {
-        TEntity entityFromDb = await GetAsync(id);
+        TEntity? entityFromDb = await dbSet.FirstOrDefaultAsync(e => e.Id == id);
 
-        await CheckParameterIsExistingInDb(entityFromDb);
+        if (entityFromDb is null) return Activator.CreateInstance<TEntity>();
 
         await Task.Run(() => dbSet.Remove(entityFromDb));
         await _context.SaveChangesAsync();
